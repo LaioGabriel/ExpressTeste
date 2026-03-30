@@ -1,0 +1,10 @@
+### Buscar todos os filmes
+GET http://localhost:3000/filmes
+
+### Buscar um filme por id
+GET http://localhost:3000/filmes/FIL001
+
+### Buscar um filme por id que não existe
+GET http://localhost:3000/filmes/eunaoexisto
+### Buscar filme por id e parametro de ignorar elenco
+GET http://localhost:3000/filmes/FIL001?ignorar=elenco,diretor,genero
