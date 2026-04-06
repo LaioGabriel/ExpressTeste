@@ -1,10 +1,43 @@
+@urlbase = http://localhost:3000
 ### Buscar todos os filmes
-GET http://localhost:3000/filmes
+GET {{urlbase}}/filmes
 
 ### Buscar um filme por id
-GET http://localhost:3000/filmes/FIL001
+GET {{urlbase}}/filmes/FIL001
 
 ### Buscar um filme por id que não existe
-GET http://localhost:3000/filmes/eunaoexisto
+GET {{urlbase}}/filmes/eunaoexisto
 ### Buscar filme por id e parametro de ignorar elenco
-GET http://localhost:3000/filmes/FIL001?ignorar=elenco,diretor,genero
+GET {{urlbase}}/filmes/FIL001?ignorar=elenco,diretor,genero
+
+### Buscar todos os filmes e ignorar elenco
+GET {{urlbase}}/filmes?ignorar=id
+
+### Adiciona conteudo
+POST {{urlbase}}/filmes
+Content-Type: application/json
+
+{
+    "titulo": "Batman: O Cavaleiro das Trevas",
+    "ano": 2008,
+    "genero": [
+        { "id": "GEN003", "nome": "Ação" },
+        { "id": "GEN001", "nome": "Crime" }
+    ],
+    "diretor": {
+        "id": "DIR011",
+        "nome": "Christopher Nolan",
+        "nascimento": "1970-07-30",
+        "nacionalidade": "Britânico"
+    },
+    "elenco": [
+        {
+            "id": "ATR030",
+            "nome": "Christian Bale",
+            "papel": "Bruce Wayne / Batman",
+            "nascimento": "1974-01-30",
+            "nacionalidade": "Britânico"
+        }
+    ],
+    "sinopse": "Quando a ameaça conhecida como o Coringa emerge de seu passado misterioso, ele causa destruição e caos nas pessoas de Gotham."
+}

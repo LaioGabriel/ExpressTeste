@@ -1,4 +1,6 @@
-export const filmes: any = [
+import type { Filme } from "./interfaces.ts";
+
+export const filmes: Filme[] = [
 	{
 		id: "FIL001",
 		titulo: "Cidade de Deus",
