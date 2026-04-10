@@ -2,6 +2,7 @@ import express from "express";
 import {configDotenv} from "dotenv";
 import { filmes } from "./data/filmes.ts";
 import type { Filme } from "./data/interfaces.ts";
+import router from "./routes/rota.ts";
 
 configDotenv()
 const porta = process.env.PORTA
@@ -16,16 +17,21 @@ function limpar(filme: Filme, ignorar: string[]) {
     return copia;
 }
 
-app.listen(porta, () => {
-    console.log(`Server is running on port ${porta}!!`);
-});
-
 app.use(express.json());
 
+// Log query params for all requests
 app.use((req, res, next) => {
-    console.log("Query params:", req.query);
+    console.log(`${req.method} ${req.url} - Query:`, req.query);
     next();
 });
+
+// Root route
+app.get("/", (req, res) => {
+    res.send("API de Filmes está rodando! Acesse /filmes para ver a lista.");
+});
+
+app.use(router);
+
 app.get("/ping", (req, res) => {
     res.send("Pong!");
 });
@@ -59,6 +65,7 @@ app.get("/filmes/:id", (req, res) => {
     res.json(filme);
     
 });
+
 app.post("/filmes", (req, res) => {
     const corpo = req.body;
 
@@ -82,4 +89,8 @@ app.post("/filmes", (req, res) => {
         mensagem: "Filme adicionado com sucesso",
         filme: novoFilme
     });
+});
+
+app.listen(porta, () => {
+    console.log(`Server is running on http://localhost:${porta} !!`);
 });
