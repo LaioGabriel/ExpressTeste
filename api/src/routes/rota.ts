@@ -8,7 +8,7 @@ router.post("/login", loginFunction);
 
 // Rota protegida para demonstração
 router.get("/perfil", authMiddleware, (req, res) => {
-    const usuario = (req as any).usuario;
+    const usuario = req.usuario;
     res.json({
         mensagem: "Você acessou uma rota protegida!",
         usuario,

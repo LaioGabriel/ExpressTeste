@@ -23,3 +23,9 @@ export interface Filme {
     elenco: Ator[];
     sinopse: string;
 }
+
+export interface Usuario {
+    email: string;
+}
+
+

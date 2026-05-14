@@ -7,3 +7,8 @@ Content-Type: application/json
     "email": "laio@mail.com",
     "senha": "senha"
 }
+
+### Acessar perfil (requer token)
+# Copie o token retornado no login e cole abaixo no lugar de SEU_TOKEN_AQUI
+GET {{url}}/perfil
+Authorization: Bearer SEU_TOKEN_AQUI
