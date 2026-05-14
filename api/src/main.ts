@@ -1,9 +1,10 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import {configDotenv} from "dotenv";
-import { filmes } from "./data/filmes.ts";
-import type { Filme } from "./data/interfaces.ts";
-import router from "./routes/rota.ts";
+import { filmes } from "./data/filmes.js";
+import type { Filme } from "./data/interfaces.js";
+import router from "./routes/rota.js";
 
 configDotenv()
 const porta = process.env.PORTA
@@ -18,7 +19,11 @@ function limpar(filme: Filme, ignorar: string[]) {
     return copia;
 }
 
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
+app.use(cookieParser());
 app.use(express.json());
 
 // Log query params for all requests
