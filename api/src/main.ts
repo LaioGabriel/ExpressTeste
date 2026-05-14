@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import {configDotenv} from "dotenv";
 import { filmes } from "./data/filmes.ts";
 import type { Filme } from "./data/interfaces.ts";
@@ -17,6 +18,7 @@ function limpar(filme: Filme, ignorar: string[]) {
     return copia;
 }
 
+app.use(cors());
 app.use(express.json());
 
 // Log query params for all requests

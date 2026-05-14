@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT Masterclass - Prática</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <h1>JWT <span>Masterclass</span></h1>
+            <p>Aprenda na prática como funciona a autenticação via Token</p>
+        </header>
+
+        <section class="auth-section card">
+            <h2>1. Autenticação</h2>
+            <p class="description">Faça login para receber seu token de acesso (expira em 1 hora).</p>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" value="laio@mail.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" value="senha" required>
+                </div>
+                <button type="submit" class="btn-primary">Gerar Token JWT</button>
+            </form>
+        </section>
+
+        <section class="token-section card">
+            <h2>2. Seu Token</h2>
+            <div class="token-display">
+                <code id="tokenText">Nenhum token gerado ainda...</code>
+                <button id="copyToken" class="btn-secondary" title="Copiar Token">📋</button>
+            </div>
+            <div class="token-status" id="tokenStatus">
+                <span class="status-dot"></span> Status: <span id="statusLabel">Desconectado</span>
+            </div>
+        </section>
+
+        <section class="action-section card">
+            <h2>3. Testar Requisição</h2>
+            <p class="description">Tente acessar dados protegidos usando o token gerado.</p>
+            <div class="actions">
+                <button id="fetchProtected" class="btn-primary">Acessar Rota Protegida</button>
+                <button id="clearToken" class="btn-danger">Limpar Token</button>
+            </div>
+        </section>
+
+        <section class="response-section card">
+            <h2>Resposta do Servidor</h2>
+            <pre id="responseBody">{ "info": "Aguardando ação..." }</pre>
+        </section>
+    </main>
+
+    <!-- Overlay para explicações -->
+    <div id="explanationOverlay" class="overlay hidden">
+        <div class="explanation-card">
+            <h3 id="expTitle">O que aconteceu?</h3>
+            <div id="expContent" class="exp-content">
+                <!-- Conteúdo dinâmico -->
+            </div>
+            <button id="closeExp" class="btn-primary">Entendi!</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
