@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Trash2, User, Film, ShieldCheck, Lock } from 'lucide-react'
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://127.0.0.1:3000';
 
 function App() {
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
@@ -183,7 +183,10 @@ function App() {
               {isLoggedIn ? "Sessão Protegida por Cookie HttpOnly" : "Nenhuma sessão ativa..."}
             </code>
           </div>
-          <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: isLoggedIn ? '#4ade80' : '#94a3b8' }}>
+          <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: response && !response.erro ? '#4ade80' : response?.erro ? '#f87171' : '#94a3b8' }}>
+            {response?.erro ? "● Servidor Inacessível" : response ? "● Servidor Online" : "● Verificando conexão..."}
+          </p>
+          <p style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: isLoggedIn ? '#4ade80' : '#94a3b8' }}>
             {isLoggedIn ? "● Conectado com Segurança" : "● Desconectado"}
           </p>
         </section>
