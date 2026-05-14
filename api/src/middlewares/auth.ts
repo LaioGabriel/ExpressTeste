@@ -1,18 +1,16 @@
 import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import type { Usuario } from "../data/interfaces.ts";
+import type { Usuario } from "../data/interfaces.js";
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    const authHeader = req.headers.authorization;
+    const token = req.cookies.jwt_token || (req.headers.authorization ? req.headers.authorization.split(" ")[1] : null);
 
-    if (!authHeader) {
+    if (!token) {
         return res.status(401).json({ 
             mensagem: "Token não fornecido",
-            detalhe: "Para acessar rotas protegidas, você precisa enviar um token JWT no header 'Authorization'."
+            detalhe: "Sua sessão expirou ou você não está logado (Cookie 'jwt_token' não encontrado)."
         });
     }
-
-    const [, token] = authHeader.split(" ");
 
     const segredo = process.env.JWT_SECRET;
 

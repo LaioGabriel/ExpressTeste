@@ -1,10 +1,11 @@
 import { Router } from "express";
-import loginFunction from "./autenticação.ts";
+import usuariosRouter from "./usuarios.js";
 import { authMiddleware } from "../middlewares/auth.ts";
 
 export const router = Router();
 
-router.post("/login", loginFunction);
+router.use(usuariosRouter);
+
 
 // Rota protegida para demonstração
 router.get("/perfil", authMiddleware, (req, res) => {

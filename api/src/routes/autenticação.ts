@@ -16,7 +16,16 @@ const loginFunction = (req: express.Request, res: express.Response) => {
     }
 
     const token = jwt.sign({ email }, segredo, { expiresIn: "1h" });
-    res.status(200).json({ token });
+    
+    // Configura o cookie HttpOnly
+    res.cookie('jwt_token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 3600000 // 1 hora em ms
+    });
+
+    res.status(200).json({ mensagem: "Login realizado com sucesso!" });
 };
 
 
